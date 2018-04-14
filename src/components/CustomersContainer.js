@@ -13,6 +13,7 @@ class CustomersContainer extends Component {
 	  this.handleSearchInput = this.handleSearchInput.bind(this);
       this.handleButtonClick = this.handleButtonClick.bind(this);
       this.handleDropdownChange = this.handleDropdownChange.bind(this);
+      this.updateURL = this.updateURL.bind(this);
 	}
 
 	componentDidMount() {
@@ -26,6 +27,18 @@ class CustomersContainer extends Component {
   		.catch(error => console.log(error))
 	}
 	
+	updateURL() {
+      if (window.history.pushState) {
+      	var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+      	if(this.state.query)
+          	newurl += '?by_full_name=' + this.state.query;
+        if(this.state.company !== 'All')
+        	newurl += '&by_company=' + this.state.company;
+         
+        window.history.pushState({path:newurl},'',newurl);
+      }
+    }
+
 	handleSearchInput = (e) => {
       this.setState({[e.target.name]: e.target.value})
     }
@@ -64,7 +77,7 @@ class CustomersContainer extends Component {
 		          </select>
 		        </label>
 		        <br /><br />
-		        <input type="submit" value="Search" /><br /><br />
+		        <input type="submit" value="Search" onClick={this.updateURL}/><br /><br />
 		        <button onClick={this.handleButtonClick}>Share link to Search</button>
 		        
 		     </form>
