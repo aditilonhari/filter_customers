@@ -26,7 +26,7 @@ class CustomersContainer extends Component {
 	handleSearchInput = (e) => {
       this.setState({[e.target.name]: e.target.value})
     }
-    
+
 	handleButtonClick = (name) => {
 		alert(name);
 		console.log("here");
@@ -81,7 +81,7 @@ class CustomersContainer extends Component {
 		             <tr key={customer.id}>
 			            <td>{customer.firstname}</td>
 			            <td>{customer.lastname}</td>
-			            <td>{customer.company_id}</td>
+			            <td>{customer.company_name}</td>
 			            <td><button onClick={() => {this.handleButtonClick(customer.firstname)}}>Share
     						</button>
     					</td>
